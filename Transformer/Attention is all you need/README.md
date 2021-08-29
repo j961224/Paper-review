@@ -38,4 +38,14 @@ attention을 통한 encoder와 decoder를 연결하는 모델이 최고의 모�
 
 : 논문에서는 encoder와 decoder는 각각 6개의 층으로 구성되어있다!
 
+---
+
+### Encoder
+
+input sequence (x_1,....,x_n)을 z=(z_1,....,z_n)으로 매핑하는 역할을 한다!
+
+우선, Encoder는 같은 6개의 층으로 **multihead self-attention layer**와 **feed-forward layer**를 사용한다.
+
+그리고 self-attention과 feed forward가 끝날 때마다, **residual connection**과 **layer normalization**을 진행한다.
+
 
