@@ -63,7 +63,7 @@ input sequence (x_1,....,x_n)을 z=(z_1,....,z_n)으로 매핑하는 역할을 �
 ~~~
 이때, Query, Key, Value 벡터는 무엇을 의미하는가?!
 
-: attention에 대해 계산하려 할 때 도움이 되는 추상적인 개념으로, Query vector는 현재 단어, Key vector는 점수를 매기려는 다른 위치에 있는 단어, Value vector는 입력의 각 단어들이다!
+: attention에 대해 계산하려 할 때 도움이 되는 추상적인 개념으로, Query vector는 현재 단어(영향을 받는 단어 변수), Key vector는 점수를 매기려는 다른 위치에 있는 단어(영향을 주는 변수), Value vector는 입력의 각 단어(그 영향에 대한 가중치)들이다!
 ~~~
 
 이러한 Query와 Key와 Value는 **weight matrix와 입력 시퀀스를 곱해서** 만들어진다!
@@ -72,5 +72,17 @@ input sequence (x_1,....,x_n)을 z=(z_1,....,z_n)으로 매핑하는 역할을 �
 
 앞서, 구한 Query와 Key를 dot product하여 attention score를 구한다.
 
-예를 들면 위의 사진을 보면, 단어 'I'가 Key와 dot-product를 하면, 나머지 단어와 얼마나 연관이 있냐에 따라 연관성이 깊다면 score가 크게 나올 것이다.
+예를 들면 위의 사진을 보면, 단어 'I'가 Key와 dot-product를 하면, **나머지 단어와 얼마나 연관이 있냐에 따라 연관성이 깊다면 score가 크게** 나올 것이다.
+
+![score](https://user-images.githubusercontent.com/59636424/131239246-d2661d24-3d0d-4985-a266-6252c8b6ec88.png)
+
+이렇게 구한 attention score에 **softmax로 0~1사이의 확률값으로 표현**하려 한다!
+
+~~~
+논문에서 attention score에 softmax함수를 사용하기 전에 루트(Key 차원값)으로 나누는데 그 이유는?!
+
+그렇게 하는 이유는 dot-product가 크다면, softmax 기울기가 작아지는 현상이 발생하여 나눈다!!(연산 결과 커지는 것을 방지!)
+~~~
+
+또한 그 값을 Value vector(입력에 대한 가중치)를 곱해 해당 단어의 임베딩이 갱신된다! (각 단어와의 연관성이 고려된다!)
 
