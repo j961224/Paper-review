@@ -63,7 +63,7 @@ input sequence (x_1,....,x_n)을 z=(z_1,....,z_n)으로 매핑하는 역할을 �
 ~~~
 이때, Query, Key, Value 벡터는 무엇을 의미하는가?!
 
-: attention에 대해 계산하려 할 때 도움이 되는 추상적인 개념으로, Query vector는 현재 단어(영향을 받는 단어 변수), Key vector는 점수를 매기려는 다른 위치에 있는 단어(영향을 주는 변수), Value vector는 입력의 각 단어(그 영향에 대한 가중치)들이다!
+: attention에 대해 계산하려 할 때 도움이 되는 추상적인 개념으로, Query vector는 현재 단어(영향을 받는 단어 변수/질문), Key vector는 점수를 매기려는 다른 위치에 있는 단어(영향을 주는 변수/물어보는 단어), Value vector는 입력의 각 단어(그 영향에 대한 가중치/질문에 대한 답)들이다!
 ~~~
 
 이러한 Query와 Key와 Value는 **weight matrix와 입력 시퀀스를 곱해서** 만들어진다!
@@ -191,10 +191,53 @@ Feed Forward(fully connected feed forward layer)는 Encoder와 Decoder에 각각
 
 -> 보통 residual connection을 사용하는 이유는 인공신경망이 깊어질수록 **기울기 소실문제를 막기** 위해서 사용한다!
 
-그래서 입출력 차원을 맞추는 이유 중 하나이기도 하다!
+그래서 residual connection수행을 위해 더해야 되기 때문에 입출력 차원을 맞추는 이유 중 하나이기도 하다!
 
-그러므로 **LayerNorm(x+sublayer(x))**로 표현할 수 있다.
+LayerNorm(x+sublayer(x))로 표현할 수 있다.
 
 
 ## Decoder
+
+**이전 timestep에서 생성한 결과를 입력으로 현재 timestep의 결과 토큰 생성**
+
+Decoder 또한 6개의 layer를 가지고 있다!
+
+Decoder는 Masked Multi-head Attention, Multi-head Attention, Feed Forward layer로 구성되어있다!!
+
+![wqqq](https://user-images.githubusercontent.com/59636424/131244246-e192c97a-287d-4584-bd52-88a2b9692626.PNG)
+
+위의 사진은 전반적인 흐름인데 encoder와 decoder의 흐름이 유사함을 볼 수 있다.
+
+---
+
+![deocder](https://user-images.githubusercontent.com/59636424/131244311-15760a4b-92d3-4af9-9d82-15bdd9742a45.PNG)
+
+Decoder의 좀 더 자세한 흐름은 Masked Multi-head Attention -> add & Normalization -> Multi head Attention -> add & Normalization -> Feed Forward -> add & Normalization식으로 흘러간다! (이것을 계속 반복!)
+
+* Masked Multi-head attention layer는 첫번째 multi-head attention layer로 사용된다.
+
+~~~
+이것이 왜 Masked Multi-head attention인 이유는?!
+
+현재 시점이 t라고 하면 output을 생성하는데 attention을 얻을 경우에 t번째의 이후의 값들을 참고하지 않겠다는 말이다!
+(지금까지 출력된 단어에 대해서만 attention을 적용!) -> t 이후에 position에 attention을 주지 않으면 t 이후의 값도 미리 알고 있게 되므로 의존하게 되므로!
+~~~
+
+이렇게 현재 decoder의 입력값을 받고 encoder의 최종값인 Key와 Vale로 **Masked Multi head attention을 통해 나온 것은 Query로 사용**한다!
+
+~~~
+왜 Masked Multi head attention에서 Query가 output이 되는가?
+
+우선, Query는 지금 decoder에서 이런 값이 나왔는데 무엇이 output이 돼야 할까?라는 질문이 될 수 있다.
+
+그래서 이러한 Query가 t 시점 이후의 정보는 masking 했으므로 t번째 위치까지만의 attention을 얻게 되므로 딱 Query가 적합하다!
+~~~
+
+**encoder의 최종값인 Key와 Value와 첫번째 multi-head attention layer의 결과인 Query도 받아 2번째 multi-head attention layer에서 decoder의 다음 단어에 적합한 단어를 찾는다!**
+
+![wown](https://user-images.githubusercontent.com/59636424/131245596-5da8e559-9a8a-4d2b-9b58-22749985422c.gif)
+
+
+
+
 
