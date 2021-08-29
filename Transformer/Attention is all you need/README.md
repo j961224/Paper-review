@@ -305,3 +305,28 @@ encoder와 유사하다!
 위의 표는 self-attention이 다른 것들과 비교했을 때,모든 면이 뛰어남을 알 수 있다. (n이 d보다 훨씬 작다!)
 
 restricted는 시퀀스 길이 n이 클 때, r크기의 주변만 고려할 때 사용한다.
+
+## 5. Training
+
+### 5-1. Training Data and Batching
+
+논문에서는 WMT 2014 English-German dataset 450만 짝지어진 문장 데이터를 사용했다.
+
+### 5-2. Optimizer
+
+Adam optimizer을 사용했고 learning rate를 training 동안 고정시키지 않고 변화시켰다.
+
+=> 이유는 처음에는 학습이 잘 되지 않은 상태이므로 learning rate를 빠르게 증가시켜 변화주다가 학습이 꽤 됐을 시점에 learning rate를 천천히 감소시켜 변화를 작게 주기 위해서이다!
+
+### 5-3. Regularization
+
+### Residual Dropout
+
+sublayer output을 정규화와 더하기 전에 적용하고 embedding 합을 구할 때, dropout 비율을 0.1 적용했다.
+
+
+## 6. Conclusion
+
+transformer는 recurrence를 이용하지 않고 빠르고 정확하게 sequential data를 처리할 수 있는 model로 제시
+
+가장 핵심적인 것은 encoder와 decoder에서 attention을 통해 Query와 가장 밀접한 연관성을 가진 Value를 강조할 수 있고 병렬화가 가능해졌다.
