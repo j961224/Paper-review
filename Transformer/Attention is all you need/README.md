@@ -155,9 +155,34 @@ Transformer는 **self-attention의 head를 8개로 병렬적으로 attention out
 ![at](https://user-images.githubusercontent.com/59636424/131242477-f4a4277a-e3af-48f4-95a3-9813e1897aac.PNG)
 
 
-### Feed Forward Neural Network
+## Feed Forward Neural Network
 
 ![ㅋㅌㅊㅋㅌㅊ](https://user-images.githubusercontent.com/59636424/131241905-30119f57-1d79-4c81-9108-c16841a38839.PNG)
 
+Feed Forward(fully connected feed forward layer)는 Encoder와 Decoder에 각각 layer에 존재한다!
 
+이러한 수식이 나오는 이유는 먼저, linear layer를 먼저 두고 그 다음에 ReLU activation, 마지막으로 linear layer를 둠으로 이러한 수식이 표현 가능하다!
+
+(여기서 중간 차원은 2048, 입력과 출력 차원은 512(d_model dimension)이다!)
+
+## Positional Encoding
+
+**단어들의 순서에 대해 고려하지 않고 있으므로 각 단어들의 순서에 대한 정보를 넣기 위해서** 사용된다!
+
+![psotit](https://user-images.githubusercontent.com/59636424/131243054-e4a812b2-9d23-4aca-bc4f-91b16160a843.PNG)
+
+각각의 임베딩된 단어에 positional encoding을 더하면 **모델의 각 단어의 위치**와 **시퀀스 내의 다른 단어 간의 위치 차이**에 대한 정보를 알 수 있다!
+
+=> 추가적으로, 이렇게 positional encoding을 더한 값은 attention하면서 Query/Key/Value 벡터들로 dot-product되면 단어간의 거리를 늘릴 수 있다!!
+
+이러한 poisitional encoding은 각각의 임베딩된 단어에 더하기 전에 **sin과 cos 함수를 이용하여 -1~1 사이의 값으로 mapping** 시킨다!
+
+![aaa](https://user-images.githubusercontent.com/59636424/131243420-2d2ce4bb-438b-414e-8dab-fd126415bdca.PNG)
+
+~~~
+내 생각이지만 원래 positional encoding은 Byte를 이용해 000,010 등으로 표현하는데 sin, cos을 통해 실수로 좀 더 풍부하게 표현하기 위함일까라는 생각을 해본다...
+~~~
+
+
+## Decoder
 
