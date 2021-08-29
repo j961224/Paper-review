@@ -72,7 +72,7 @@ input sequence (x_1,....,x_n)을 z=(z_1,....,z_n)으로 매핑하는 역할을 �
 
 앞서, 구한 Query와 Key를 dot product하여 attention score를 구한다.
 
-예를 들면 위의 사진을 보면, 단어 'I'가 Key와 dot-product를 하면, **나머지 단어와 얼마나 연관이 있냐에 따라 연관성이 깊다면 score가 크게** 나올 것이다.
+예를 들면 위의 사진을 보면, 단어 'I'가 Key와 dot-product를 하면, **나머지 단어와 얼마나 연관이 있냐에 따라 연관성이 깊다면 score가 크게** 나올 것이다. (한마디로, 영향을 받는 단어와 주는 단어들의 유사도 측정 과정)
 
 ![score](https://user-images.githubusercontent.com/59636424/131239246-d2661d24-3d0d-4985-a266-6252c8b6ec88.png)
 
@@ -86,3 +86,6 @@ input sequence (x_1,....,x_n)을 z=(z_1,....,z_n)으로 매핑하는 역할을 �
 
 또한 그 값을 Value vector(입력에 대한 가중치)를 곱해 해당 단어의 임베딩이 갱신된다! (각 단어와의 연관성이 고려된다!)
 
+-> 최종적으로 이렇게 한 단어씩 구한 value weight sum이 구해준 것을 z-vector로 표현한다!!
+
+-> 이 말이 즉, **input sequence (x_1,....,x_n)을 z=(z_1,....,z_n)으로 매핑하는 역할**을 뜻한다.
