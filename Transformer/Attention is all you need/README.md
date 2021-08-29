@@ -63,5 +63,14 @@ input sequence (x_1,....,x_n)을 z=(z_1,....,z_n)으로 매핑하는 역할을 �
 ~~~
 이때, Query, Key, Value 벡터는 무엇을 의미하는가?!
 
-: attention에 대해 계싼하려 할 때 도움이 되는 추상적인 개념으로, Query vector는 현재 단어, Key vector는 점수를 매기려는 다른 위치에 있는 단어, Value vector는 입력의 각 단어들이다!
+: attention에 대해 계산하려 할 때 도움이 되는 추상적인 개념으로, Query vector는 현재 단어, Key vector는 점수를 매기려는 다른 위치에 있는 단어, Value vector는 입력의 각 단어들이다!
 ~~~
+
+이러한 Query와 Key와 Value는 **weight matrix와 입력 시퀀스를 곱해서** 만들어진다!
+
+![2](https://user-images.githubusercontent.com/59636424/131239123-9578926e-dfd7-4109-b04e-93ef8b55ebfc.png)
+
+앞서, 구한 Query와 Key를 dot product하여 attention score를 구한다.
+
+예를 들면 위의 사진을 보면, 단어 'I'가 Key와 dot-product를 하면, 나머지 단어와 얼마나 연관이 있냐에 따라 연관성이 깊다면 score가 크게 나올 것이다.
+
