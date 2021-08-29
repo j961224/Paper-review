@@ -20,7 +20,7 @@ attention을 통한 encoder와 decoder를 연결하는 모델이 최고의 모�
 
     * 여기서 입출력 사이의 전역 의존성은 입출력 사이의 거리에 영향없이 무관하게 학습이 가능하다는 말을 뜻한다.
 
-이러한 문제를 attention mechanism을 가진 transforemr를 통해 recurrence를 제거하고 전역 의존성을 이끌어 내려고 한다!
+이러한 문제를 attention mechanism을 가진 transformer를 통해 recurrence를 제거하고 전역 의존성을 이끌어 내려고 한다!
 
 그리고 transformer는 상당한 병렬화와 높은 성능을 자랑한다!
 
