@@ -123,7 +123,7 @@ Transformer는 **self-attention의 head를 8개로 병렬적으로 attention out
 ~~~
 이렇게 self-attention말고 multi-head attention을 하는 이유는?
 
-다른 포지션에 attention하는 모델의 능력을 향상시키기 위함이다. self-attention은 다른 단어 뿐만 아니라 자신의 단어에 더 많은 영향을 받는 것을 볼 수 있기 때문이다.
+다른 포지션에 attention하는 모델의 능력을 향상시키기 위함이다. self-attention은 다른 단어 뿐만 아닌 자신의 단어에 더 많은 영향을 받는 것을 볼 수 있기 때문이다.
 
 또한, Attention을 가지는 head는 무작위로 Query, Key, Value가 초기화 되므로, 다른 표현 subspace에 임베딩되므로 좀 더 일반적? 이므로 사용한다.
 ~~~
