@@ -134,3 +134,30 @@ Transformer는 **self-attention의 head를 8개로 병렬적으로 attention out
 
 ![jrur](https://user-images.githubusercontent.com/59636424/131241465-cf64f4f4-d140-48bf-9bc5-9f402806adbe.png)
 
+이러한 과정을 수식으로 표현하면 아래와 같다.
+
+![mha](https://user-images.githubusercontent.com/59636424/131241939-519fce1f-0bec-493e-9730-d5c52eac09c3.PNG)
+
+각각 head마다 self-attention을 하여 concatenate하고 weight matrix W0가 곱해 구함을 볼 수 있다.
+
+아래의 수식은 위의 수식을 좀 더 자세히 표현한 수식이다!
+
+![ddddd](https://user-images.githubusercontent.com/59636424/131242362-43e41492-a035-40bd-a3bb-6951dea7385c.PNG)
+
+~~~
+이 때, d_Q, d_K, d_V는 각각 query와 key, value 개수를 의미한다!
+~~~
+
+논문에서는 d_k=d_v=d_model/h=64이므로 **이렇게 각 head들의 줄인 차원으로 총 연산량은 전체 차원의 1개 single-head attention과 유사하다!**
+
+* 아직 Attention(~)=[d_V x d_v]가 이해가 안 간다면 아래의 사진을 보고 이해할 수 있을 것이다!
+
+![at](https://user-images.githubusercontent.com/59636424/131242477-f4a4277a-e3af-48f4-95a3-9813e1897aac.PNG)
+
+
+### Feed Forward Neural Network
+
+![ㅋㅌㅊㅋㅌㅊ](https://user-images.githubusercontent.com/59636424/131241905-30119f57-1d79-4c81-9108-c16841a38839.PNG)
+
+
+
