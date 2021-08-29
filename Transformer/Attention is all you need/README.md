@@ -48,4 +48,8 @@ input sequence (x_1,....,x_n)을 z=(z_1,....,z_n)으로 매핑하는 역할을 �
 
 그리고 self-attention과 feed forward가 끝날 때마다, **residual connection**과 **layer normalization**을 진행한다.
 
+### 그러면 여기서 말하는 self-attention은 무엇일까?!!
+
+우선, 간단히 말하면 Query weight matrix, Key weight matrix, Value weight matrix와 Query, Key, Value를 가지고 계산하여 value vector들의 weight를 구하는 것이 목표이다!
+
 
