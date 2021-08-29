@@ -105,7 +105,7 @@ input sequence (x_1,....,x_n)을 z=(z_1,....,z_n)으로 매핑하는 역할을 �
 ~~~
 self-attention 시, 주의할 점!
 
-* Query vector와 Key vector는 내적하므로 차원이 같아야 한다! => value vector는 달라다 된다!
+* Query vector와 Key vector는 내적하므로 차원이 같아야 한다! => value vector는 달라도 된다!
 
 * value vector 차원은 encoding vector 차원가 같아야 된다!
 ~~~
