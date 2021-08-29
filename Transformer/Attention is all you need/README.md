@@ -97,3 +97,34 @@ input sequence (x_1,....,x_n)을 z=(z_1,....,z_n)으로 매핑하는 역할을 �
 * 전반적으로 진행되는 self-attetion 과정
 
 ![과정](https://user-images.githubusercontent.com/59636424/131239680-7d587a9e-23e9-4ac9-9e74-7d7ded66475e.PNG)
+
+* **또한 논문에서 Scaled Dot-Product Attention 과정이다.**
+
+![ㄴㅇㄹㅇㄹㅇㄹ](https://user-images.githubusercontent.com/59636424/131239759-015194cf-a5b4-4857-8274-787a28e14261.PNG)
+
+~~~
+self-attention 시, 주의할 점!
+
+* Query vector와 Key vector는 내적하므로 차원이 같아야 한다! => value vector는 달라다 된다!
+
+* value vector 차원은 encoding vector 차원가 같아야 된다!
+~~~
+
+### 그렇다면 논문에서 쓰이는 Multi-head attention은 무엇인가?!
+
+self-attention layer를 다중으로 구현한 것이 Multi-head attention이다!
+
+Transformer는 **self-attention의 head를 8개로 병렬적으로 attention output을 구하는 방식**을 채택했다!
+
+이렇게 구한 8개의 attention output을 concatenate를 한다!
+
+![ㅋㅋ](https://user-images.githubusercontent.com/59636424/131240550-8d3be7ac-1312-4315-9b7e-101afac963a9.png)
+
+~~~
+이렇게 self-attention말고 multi-head attention을 하는 이유는?
+
+다른 포지션에 attention하는 모델의 능력을 향상시키기 위함이다. self-attention은 다른 단어 뿐만 아니라 자신의 단어에 더 많은 영향을 받는 것을 볼 수 있기 때문이다.
+
+또한, Attention을 가지는 head는 무작위로 Query, Key, Value가 초기화 되므로, 다른 표현 subspace에 임베딩되므로 좀 더 일반적? 이므로 사용한다.
+~~~
+
