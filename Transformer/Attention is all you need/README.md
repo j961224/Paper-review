@@ -239,6 +239,9 @@ Decoder의 좀 더 자세한 흐름은 Masked Multi-head Attention -> add & Norm
 
 ![wown](https://user-images.githubusercontent.com/59636424/131245596-5da8e559-9a8a-4d2b-9b58-22749985422c.gif)
 
+![qqqqqqq](https://user-images.githubusercontent.com/59636424/131250627-243f86de-9ccc-4556-b499-99821b0768e4.gif)
+
+
 **이외에는 encoder와 유사하다!**
 
 ### 마지막 linear and Softmax layer
