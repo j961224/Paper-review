@@ -52,4 +52,7 @@ input sequence (x_1,....,x_n)을 z=(z_1,....,z_n)으로 매핑하는 역할을 �
 
 우선, 간단히 말하면 Query weight matrix, Key weight matrix, Value weight matrix와 Query, Key, Value를 가지고 계산하여 value vector들의 weight를 구하는 것이 목표이다!
 
+~~~
+논문에서는 512차원으로 임베딩하여 유지하는데 이 수치는 하이퍼 파라미터이므로 알아서 더 해도 되는데 내 생각은 512차원만의 길이가 존재하기는 힘들고 그 이상으로 할 경우, 계산적 효율이 매우 안 좋다고 생각합니다.. -> 이 부분에 대해서 좋은 의견있으면 적극 수용하겠습니다!
+~~~
 
