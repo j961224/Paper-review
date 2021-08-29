@@ -2,7 +2,7 @@
 
 * 본 논문 링크: https://papers.nips.cc/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf
 
-## Abstract
+## 1. Abstract
 
 이때까지 Recurrent model은 순차적으로 처리하는 특징으로 여러 작업을 동시에 수행하지 못 했다!
 
@@ -12,7 +12,7 @@ attention을 통한 encoder와 decoder를 연결하는 모델이 최고의 모�
 
 이러한 mechanism은 **병렬 처리 기능**과 **학습 시간이 덜 소요**되므로 성능이 좋다!!
 
-## Introduction
+## 2. Introduction
 
 이러한 RNN, LSTM, GRU 등의 언어 모델링은 sequence 모델링으로 순차적 계산의 근본적인 제약이 여전히 있다!
 
@@ -24,7 +24,7 @@ attention을 통한 encoder와 decoder를 연결하는 모델이 최고의 모�
 
 그리고 transformer는 상당한 병렬화와 높은 성능을 자랑한다!
 
-## Model Architecture
+## 3. Model Architecture
 
 모델 구조는 간단히 말하자면 **stacked self-attention**과 **pointwise fully connected layer** 구조를 가진다.
 
@@ -155,7 +155,7 @@ Transformer는 **self-attention의 head를 8개로 병렬적으로 attention out
 ![at](https://user-images.githubusercontent.com/59636424/131242477-f4a4277a-e3af-48f4-95a3-9813e1897aac.PNG)
 
 
-## Feed Forward Neural Network
+### Feed Forward Neural Network
 
 ![ㅋㅌㅊㅋㅌㅊ](https://user-images.githubusercontent.com/59636424/131241905-30119f57-1d79-4c81-9108-c16841a38839.PNG)
 
@@ -165,7 +165,7 @@ Feed Forward(fully connected feed forward layer)는 Encoder와 Decoder에 각각
 
 (여기서 중간 차원은 2048, 입력과 출력 차원은 512(d_model dimension)이다!)
 
-## Positional Encoding
+### Positional Encoding
 
 **단어들의 순서에 대해 고려하지 않고 있으므로 각 단어들의 순서에 대한 정보를 넣기 위해서** 사용된다!
 
@@ -183,7 +183,7 @@ Feed Forward(fully connected feed forward layer)는 Encoder와 Decoder에 각각
 내 생각이지만 원래 positional encoding은 Byte를 이용해 000,010 등으로 표현하는데 sin, cos을 통해 실수로 좀 더 풍부하게 표현하기 위함일까라는 생각을 해본다...
 ~~~
 
-## residual connection & layer normalization
+### residual connection & layer normalization
 
 ![qqqqq](https://user-images.githubusercontent.com/59636424/131243886-5baa022b-ff0a-403a-bc3e-ed36a4ca58db.PNG)
 
@@ -196,7 +196,7 @@ Feed Forward(fully connected feed forward layer)는 Encoder와 Decoder에 각각
 LayerNorm(x+sublayer(x))로 표현할 수 있다.
 
 
-## Decoder
+### Decoder
 
 **이전 timestep에서 생성한 결과를 입력으로 현재 timestep의 결과 토큰 생성**
 
@@ -235,9 +235,73 @@ Decoder의 좀 더 자세한 흐름은 Masked Multi-head Attention -> add & Norm
 
 **encoder의 최종값인 Key와 Value와 첫번째 multi-head attention layer의 결과인 Query도 받아 2번째 multi-head attention layer에서 decoder의 다음 단어에 적합한 단어를 찾는다!**
 
+* 아래는 decoder가 다음 단어를 출력하는 과정이다.
+
 ![wown](https://user-images.githubusercontent.com/59636424/131245596-5da8e559-9a8a-4d2b-9b58-22749985422c.gif)
 
+**이외에는 encoder와 유사하다!**
+
+### 마지막 linear and Softmax layer
+
+**이제 여러 개의 decoder를 거치고 난 후, 소수로 이뤄진 벡터 1개가 남는데 이것을 단어로 바꿔주는 역할을 한다!**
+
+* linear layer는 벡터를 softmax에 들어갈 logit 변경 시켜준다!(fully-connected layer로 training data가 1000개 영어 단어를 학습했다면 logits vector를 1000의 크기로 만든다.)
+
+* softmax layer는 모든 단어에 대한 확률값으로 만들고 가장 큰 출력값을 가진 단어가 출력된다!
+
+![z](https://user-images.githubusercontent.com/59636424/131245880-8b9e4a6c-2931-4461-a3e9-13d2971cd5d0.PNG)
 
 
+### Application of Attention in our Model
 
+#### 1. encoder self-attention layer
 
+![zc](https://user-images.githubusercontent.com/59636424/131245916-a465e039-a506-4abb-9b4a-6794518749ca.PNG)
+
+앞서, 모두 말했지만 이 self-attention layer는 이전 layer의 output에서 모두 Key, Value, Query를 가져와 사용한다.
+
+(예를 들면 첫번째 layer는 input 값을 받으니 그 전에 position encoding과 embedding한 input embedding이 될 것이다.)
+
+#### 2. decoder self-attention layer
+
+![wwd](https://user-images.githubusercontent.com/59636424/131246032-1f9fbca7-3d14-4caf-b7e9-c0e534b45879.PNG)
+
+encoder와 유사하다!
+
+그러나 미래에 오는 값들에 대한 attention은 수행이 불가능하다!! (현재 t 시점 이후 값들은 masking out을 통해 접근이 불가능하게 만든다!)
+
+#### 3. encoder-decoder attention layer
+
+![qwqw](https://user-images.githubusercontent.com/59636424/131246059-85ccaf27-fabc-4773-9db8-44492d3e67f8.PNG)
+
+이전 decoder layer에서 만든 Query와 encoder output에서 오는 Key, Value들로 encoder output의 모든 position에 attention을 줄 수 있다.
+
+## 4. Why self-Attention
+
+1. 각 층에서 발생하는 연산 복잡도 감소!(레이어당 전체 연산량이 줄어든다!)
+
+~~~
+입력의 길이가 d_model(512차원)의 크기보다 입력의 길이가 작을 경우에 해당하지만 대부분 데이터셋을 구성하는 문장들은 d_model(512차원)보다 짧다!
+~~~
+
+2. 병렬적 계산이 가능하다.
+
+~~~
+병렬적 계산으로 8 head로 8번의 self-attention을 수행하지만 전체 layer의 1번 self-attention의 계산량과 같다!
+~~~
+
+3. Long-term dependency도 잘 학습한다.
+
+~~~
+멀리 떨어진 원소들 사이의 거리가 상수배로 매우 작으므로 이러한 상수배로 멀리 떨어진 원소들을 학습한다. (position encoding과 softmax를 사용했기 때문에)
+~~~
+
+![qqqq](https://user-images.githubusercontent.com/59636424/131246434-a5b1005c-be9a-4279-bb51-9d1e45cb77fb.PNG)
+
+위의 사진은 head가 늘어날수록 다양한 가중치를 가짐을 볼 수 있다.
+
+![aaa](https://user-images.githubusercontent.com/59636424/131246462-6597dcce-f53d-4109-9cc6-cc99ecb9d390.PNG)
+
+위의 표는 self-attention이 다른 것들과 비교했을 때,모든 면이 뛰어남을 알 수 있다. (n이 d보다 훨씬 작다!)
+
+restricted는 시퀀스 길이 n이 클 때, r크기의 주변만 고려할 때 사용한다.
