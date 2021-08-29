@@ -11,3 +11,17 @@ attention을 통한 encoder와 decoder를 연결하는 모델이 최고의 모�
 이 논문에서는 앞서 말한 문제가 있던 Recurrence를 제거하고 attention mechanism을 이용한 network 구조를 가진 **Transformer**를 제안하려고 한다!
 
 이러한 mechanism은 **병렬 처리 기능**과 **학습 시간이 덜 소요**되므로 성능이 좋다!!
+
+## Introduction
+
+이러한 RNN, LSTM, GRU 등의 언어 모델링은 sequence 모델링으로 순차적 계산의 근본적인 제약이 여전히 있다!
+
+또한, 입출력 사이의 전역 의존성을 이끌어 낼 필요도 있다. 
+
+    * 여기서 입출력 사이의 전역 의존성은 입출력 사이의 거리에 영향없이 무관하게 학습이 가능하다는 말을 뜻한다.
+
+이러한 문제를 attention mechanism을 가진 transforemr를 통해 recurrence를 제거하고 전역 의존성을 이끌어 내려고 한다!
+
+그리고 transformer는 상당한 병렬화와 높은 성능을 자랑한다!
+
+## 
