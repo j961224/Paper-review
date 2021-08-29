@@ -24,4 +24,18 @@ attention을 통한 encoder와 decoder를 연결하는 모델이 최고의 모�
 
 그리고 transformer는 상당한 병렬화와 높은 성능을 자랑한다!
 
-## 
+## Model Architecture
+
+모델 구조는 간단히 말하자면 **stacked self-attention**과 **pointwise fully connected layer** 구조를 가진다.
+
+### encoder and Decoder Stacks
+
+![attention구조](https://user-images.githubusercontent.com/59636424/131236887-85f885bf-19e4-4184-878b-35d6b5fb9367.PNG)
+
+: 이 구조는 Attention만으로 encoder와 decoder를 가지는 구조이다!
+
+![encoder decoder](https://user-images.githubusercontent.com/59636424/131237922-1e1f2555-8bbe-4133-a488-76802f0bc4e7.PNG)
+
+: 논문에서는 encoder와 decoder는 각각 6개의 층으로 구성되어있다!
+
+
