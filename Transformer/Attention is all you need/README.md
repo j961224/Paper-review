@@ -128,3 +128,9 @@ Transformer는 **self-attention의 head를 8개로 병렬적으로 attention out
 또한, Attention을 가지는 head는 무작위로 Query, Key, Value가 초기화 되므로, 다른 표현 subspace에 임베딩되므로 좀 더 일반적? 이므로 사용한다.
 ~~~
 
+그런데, **Feed Forward layer에 8개의 matrix 처리가 불가하므로 weight matrix W0으로 변환시켜준다!**
+
+(이 때, output은 입출력 차원과 맞추기 위해서 weight matrix W0 dimension을 그에 맞게 설정해준다.)
+
+![jrur](https://user-images.githubusercontent.com/59636424/131241465-cf64f4f4-d140-48bf-9bc5-9f402806adbe.png)
+
