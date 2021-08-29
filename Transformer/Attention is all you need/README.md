@@ -183,6 +183,18 @@ Feed Forward(fully connected feed forward layer)는 Encoder와 Decoder에 각각
 내 생각이지만 원래 positional encoding은 Byte를 이용해 000,010 등으로 표현하는데 sin, cos을 통해 실수로 좀 더 풍부하게 표현하기 위함일까라는 생각을 해본다...
 ~~~
 
+## residual connection & layer normalization
+
+![qqqqq](https://user-images.githubusercontent.com/59636424/131243886-5baa022b-ff0a-403a-bc3e-ed36a4ca58db.PNG)
+
+각 sublayer 마다 residual connection과 그 이후에 바로 layer normalizaion이 존재한다.
+
+-> 보통 residual connection을 사용하는 이유는 인공신경망이 깊어질수록 **기울기 소실문제를 막기** 위해서 사용한다!
+
+그래서 입출력 차원을 맞추는 이유 중 하나이기도 하다!
+
+그러므로 **LayerNorm(x+sublayer(x))**로 표현할 수 있다.
+
 
 ## Decoder
 
