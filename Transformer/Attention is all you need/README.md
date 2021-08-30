@@ -333,3 +333,26 @@ sublayer output을 정규화와 더하기 전에 적용하고 embedding 합을 �
 transformer는 recurrence를 이용하지 않고 빠르고 정확하게 sequential data를 처리할 수 있는 model로 제시
 
 가장 핵심적인 것은 encoder와 decoder에서 attention을 통해 Query와 가장 밀접한 연관성을 가진 Value를 강조할 수 있고 병렬화가 가능해졌다.
+
+
+## 참조
+
+### 블로그
+
+https://misconstructed.tistory.com/62
+
+https://ariz1623.tistory.com/295
+
+https://omicro03.medium.com/attention-is-all-you-need-transformer-paper-%EC%A0%95%EB%A6%AC-83066192d9ab
+
+https://hipgyung.tistory.com/entry/ATTENTION-IS-ALL-YOU-NEED-%EB%85%BC%EB%AC%B8-%EB%A6%AC%EB%B7%B0
+
+https://sanghyu.tistory.com/107
+
+https://ahnjg.tistory.com/57
+
+https://pozalabs.github.io/transformer/
+
+### 논문
+
+https://papers.nips.cc/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf
