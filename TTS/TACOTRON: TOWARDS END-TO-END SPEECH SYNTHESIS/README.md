@@ -217,7 +217,48 @@ input으로 context vector + attention RNN cell output을 사용한다!
     미분을 이용하고 학습 가능한 weight가 없기 때문에 이 과정에서 어떠한 loss도 없다.
     
     
-    
+## 3. EXPERIMENTS
 
+Tacotron을 North American English dataset(전문 여성 화자의 24.6시간 정도의 발화)에 대해 학습
+    
+### 3-1. Ablation Analysis
+    
+![ㄱㄱㄱㄱㄱㄱ](https://user-images.githubusercontent.com/59636424/132997824-40a63049-b853-45ea-a719-737414bf6983.PNG)
+
+    
+* vanilla Seq2Seq 모델(a)과 attention alignment(sequence) 비교
+
+-> vanilla Seq2Seq 모델의 output의 그래프를 우선 보면 좀 늘어져 있고 실제로 음성도 이상하게 늘어지는 소리가 나는 결과가 나왔다.
+
+대조적으로 Tacotron은 깨끗하고 스무스한 alignment를 갖는다. -> 실제로 Tacotron은 깔끔한 소리가 나는 결과가 나왔다.
+    
+* (b)는 CBHG encoder 대신, 2-layer의 residual GRU 인코더를 사용하여 비교
+    
+-> GRU encoder의 alignment가 더 noisy함을 알 수 있다. -> 실제로 음성도 약간의 noisy가 껴있다!
+
+---
+    
+![ㅂㅂ](https://user-images.githubusercontent.com/59636424/132997924-c17097ae-5991-4333-b7e8-e0348060af84.PNG)
+
+* post process net을 사용한 모델과 사용하지 않은 모델 비교
+    
+-> post-processing net의 예측이 더 나은 하모닉(여러 배음)을 포함한다.(사진에서 post process net은 아래에서 주름이 좀 더 이어지는 것을 확인할 수 있다.)
+    
+-> post process net을 사용하지 않는 것은 실제 음성에서는 인조적 소리가 나고 사용하는 것은 깔끔하고 자연스러운 소리가 난다.
+    
+### 3-2. Mean Opinion Score Tests
+
+![ㅈㅈㅈㅈ](https://user-images.githubusercontent.com/59636424/132997993-6250e8f5-fc3c-4243-8a4f-a0c2953803f7.PNG)
+
+* 본 논문에서는 mean opinion score test를 진행했고, 자연스러움에 대해 5점 만점으로 평가
+    
+* prarmetric 시스템과 concatenative 시스템과 비교했을 때, **3.82로 좋은 결과**를 보여줬다.
+
+## 4. Discussions
+
+* 논문에서 **Tacotron을 제안**했고 이는 character 시퀀스를 입력으로 받아 spectrogram을 출력하는 **end-to-end TTS 모델**
+
+* mean opinion score로 실제 자연스러움의 부분에 있어 **parametric system의 성능을 능가**했다.
+    
 
 
