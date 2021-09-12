@@ -11,3 +11,5 @@
 * 훈련 단계: 언어적/음성적 feature 추출, 모델 훈련
 
 * 합성 단계: 음성적 feautre 생성, 음성 신호 합성 
+
+참조: http://www.epnc.co.kr/news/articleView.html?idxno=93221
