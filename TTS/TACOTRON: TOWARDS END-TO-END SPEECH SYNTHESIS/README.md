@@ -80,7 +80,7 @@
 
 Tacotron은 attention 기반 sequence to sequence 모델이다. (구성은 크게 encoder, attention 기반의 decoder, post-processing net이 존재한다.)
 
-### 2-1. CHBG Module
+### 2-1. CBHG Module
 
 ![cbhg논문](https://user-images.githubusercontent.com/59636424/132989187-634c43d0-4f13-4c67-99c4-85f99e4b9b2d.PNG)
 
@@ -94,15 +94,44 @@ CBHG는 sequence로부터 특성을 추출하는 강력한 모듈이다!
 
   1. input sequence를 **k개의 1-D convolutional filters를 가진 bank를 통과**한다. **kth filter는 width k**를 가지는 convolution filter이다. (k=1,2,....k)
     
+    1D convolution Bank는 k개의 필터(각각 k의 길이는 1~k)를 가지고 있다.
+    
+    각 filter는 k개의 Sequence를 보고 특정길이(k)를 고려하여 정보를 추출하는 역할
+    
     이 filter는 local 정보와 문백 정보를 추출한다! (unigram, bigram,.. k-gram까지 filter를 이용해서 모델링하는 것과 비슷하다!)
     
     이렇게 k개의 convolution의 출력은 stacking 된다. (쌓인다)
     
-  2. 시간에 따라 max pooling을 하여 Sequence에 따라 변하지 않는 부분(local invariance)를 추출한다. (local invariance(변하지 않는 부분)을 증가시키기 위해)
+  2. 시간에 따라 **max pooling**을 하여 Sequence에 따라 변하지 않는 부분(local invariance)를 추출한다. (local invariance(변하지 않는 부분)을 증가시키기 위해)
   
-    -> 이렇게 local invariance를 증가시키는 것은 앞서 k개의 다른 filter를 사용해 추출하여 문맥이 달라져도 변하지 않는 부분들을 강조를 뜻한다.
+    -> 이렇게 local invariance를 증가시키는 것은 문맥이 달라져도 변하지 않는 부분들을 강조한다는 뜻이다!
   
   2-1. stride 1을 사용하여 time resolution(시간 축 상의 해상도)을 보존한다!
     
     -> 최대한 들어온 sequence 순서를 지켜주기 위해서!!
+
+  3. **고정된 폭을 가지는 1D convolution**을 통과 -> Sequence 데이터의 벡터 사이즈와 일치하는 벡터를 생성
+  
+  4. **residual connection**으로 앞서 통과해서 생성된 벡터와 input Sequence 벡터와 더한다.
+  
+    residual connection으로 모델의 깊게 쌓을 수 있게 되고 학습할 때 빠르게 수렴이 가능하다.
+
+  5. **Highway 네트워크**를 통과하여 high level 특성을 추출한다.
+  
+  6. 정방향 문맥과 역방향 문맥에서 Sequential 특성을 추출하기 위해서 **bidirectional GRU** 사용한다.
+
+**모든 1-D convolution Network는 Batch Normalization을 포함(정규화 작용)**
+
+* Highway 네트워크
+
+![ㄱㄱㄱㄱㄱ](https://user-images.githubusercontent.com/59636424/132992224-cbcbbd7c-1fa0-42bd-918f-76af7487e7b3.PNG)
+
+Hightway 네트워크는 Gate 구조를 추가한 Residual Connection이다. **입력값 x와 함수 H(x)를 어느정도의 비율로 섞을지를 학습하여 결정한다.**
+
+0~1의 값을 갖는 T(x)를 만들어 x와 H(x)에 곱해준다!
+
+=> 이러한 것이 층이 깊어지더라도 속성을 유지할 수 있으므로 high level 특성을 추출할 수 있다!
+
+### 2-2. Encoder
+
 
