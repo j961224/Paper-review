@@ -74,3 +74,35 @@
     
     US English evaluation st에서 3.82의 mean opinion score를 기록했다.
 
+## 2. Model Architecture
+
+![wwww](https://user-images.githubusercontent.com/59636424/132988754-5631abd4-d7f7-40c6-ae99-865b29664844.png)
+
+Tacotron은 attention 기반 sequence to sequence 모델이다. (구성은 크게 encoder, attention 기반의 decoder, post-processing net이 존재한다.)
+
+### 2-1. CHBG Module
+
+![cbhg논문](https://user-images.githubusercontent.com/59636424/132989187-634c43d0-4f13-4c67-99c4-85f99e4b9b2d.PNG)
+
+CBHG는 encoder와 decoder 둘 다 사용하고 **1-D convolutional filters의 bank, Highway network, Bidirectional GRU**를 사용한다. (앞글자를 따서 CBHG)
+
+CBHG는 sequence로부터 특성을 추출하는 강력한 모듈이다!
+
+![cbhg 종류](https://user-images.githubusercontent.com/59636424/132989701-394988e9-f2bc-4879-8902-737b489ac43a.PNG)
+
+위의 그림은 encoder의 CBHG 구조로 자세히 뜯어보자!
+
+  1. input sequence를 **k개의 1-D convolutional filters를 가진 bank를 통과**한다. **kth filter는 width k**를 가지는 convolution filter이다. (k=1,2,....k)
+    
+    이 filter는 local 정보와 문백 정보를 추출한다! (unigram, bigram,.. k-gram까지 filter를 이용해서 모델링하는 것과 비슷하다!)
+    
+    이렇게 k개의 convolution의 출력은 stacking 된다. (쌓인다)
+    
+  2. 시간에 따라 max pooling을 하여 Sequence에 따라 변하지 않는 부분(local invariance)를 추출한다. (local invariance(변하지 않는 부분)을 증가시키기 위해)
+  
+    -> 이렇게 local invariance를 증가시키는 것은 앞서 k개의 다른 filter를 사용해 추출하여 문맥이 달라져도 변하지 않는 부분들을 강조를 뜻한다.
+  
+  2-1. stride 1을 사용하여 time resolution(시간 축 상의 해상도)을 보존한다!
+    
+    -> 최대한 들어온 sequence 순서를 지켜주기 위해서!!
+
