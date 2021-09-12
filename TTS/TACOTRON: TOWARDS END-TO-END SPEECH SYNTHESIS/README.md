@@ -161,8 +161,6 @@ Hightway 네트워크는 Gate 구조를 추가한 Residual Connection이다. **�
 
 ### 2-3. Decoder
 
-![디코더](https://user-images.githubusercontent.com/59636424/132995163-41289fa1-ed01-44cc-a8c9-d409982842f0.PNG)
-
 decoder는 **content-based tanh attention decoder**를 사용한다! (그림에서 2번째 line에서 Attention RNN이라고 되어 있는데 Decoder RNN이다!)
 
 content-based Function은 dot product, general, concat이 있는데(Seq2Seq with attention 강의에서 attention mechanisms 3가지) 이중에서 content-based tanh는 아래와 같다.
@@ -172,6 +170,8 @@ content-based Function은 dot product, general, concat이 있는데(Seq2Seq with
 그리고 decoder RNN과 attention RNN을 사용한다!
 
 input으로 context vector + attention RNN cell output을 사용한다!
+
+![디코더](https://user-images.githubusercontent.com/59636424/132995163-41289fa1-ed01-44cc-a8c9-d409982842f0.PNG)
 
 * 전반적인 Decoder 흐름
 
