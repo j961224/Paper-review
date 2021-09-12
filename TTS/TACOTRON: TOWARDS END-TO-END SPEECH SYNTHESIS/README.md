@@ -70,7 +70,7 @@
     
     <text, audio>로 주어진 쌍에서, random 초기화로 완전히 훈련될 수 있다.
     
-    음소(언어의 낱말을 구분시켜주는 이론적인 낱낱의 소리) 수준의 할당이 필요없으니 texst만 있는 많은 양의 데이터로 학습 가능하다.
+    음소(언어의 낱말을 구분시켜주는 이론적인 낱낱의 소리 / 쉽게 말해 영어사전의 발음기호를 생각) 수준의 할당이 필요없으니 texst만 있는 많은 양의 데이터로 학습 가능하다.
     
     US English evaluation st에서 3.82의 mean opinion score를 기록했다.
 
@@ -122,6 +122,8 @@ CBHG는 sequence로부터 특성을 추출하는 강력한 모듈이다!
 
 **모든 1-D convolution Network는 Batch Normalization을 포함(정규화 작용)**
 
+---
+
 * Highway 네트워크
 
 ![ㄱㄱㄱㄱㄱ](https://user-images.githubusercontent.com/59636424/132992224-cbcbbd7c-1fa0-42bd-918f-76af7487e7b3.PNG)
@@ -133,5 +135,70 @@ Hightway 네트워크는 Gate 구조를 추가한 Residual Connection이다. **�
 => 이러한 것이 층이 깊어지더라도 속성을 유지할 수 있으므로 high level 특성을 추출할 수 있다!
 
 ### 2-2. Encoder
+
+![인코더](https://user-images.githubusercontent.com/59636424/132992445-9eb99f22-fd01-4c93-9cd2-f30d96c85d51.PNG)
+
+**인코더의 목표는 text의 강력한 시퀀셜 표현을 추출하는 것이다.**
+
+  1. input을 character Sequence로 받고 각 문자들을 one-hot벡터로 만든 후, embedding vector로 변환시켜준다.
+
+  2. non-linear transform인 **prenet**의 dropout과 bottleneck layer로 수렴을 돕고 일반화 효과를 낸다.
+  
+        Channel 의 차원을 축소하는 개념이 bottleneck layer(FC layer -> RELU -> Dropout(0.5) -> FC layer -> RELU -> Dropout(0.5))
+        
+        Dropout으로 과적합을 방지하려한다.
+  
+  3. CBHG module로 최종 인코더의 output으로 바꾼다.
+
+### 2-3. Decoder
+
+![디코더](https://user-images.githubusercontent.com/59636424/132995163-41289fa1-ed01-44cc-a8c9-d409982842f0.PNG)
+
+decoder는 **content-based tanh attention decoder**를 사용한다! (그림에서 2번째 line에서 Attention RNN이라고 되어 있는데 Decoder RNN이다!)
+
+content-based Function은 dot product, general, concat이 있는데(Seq2Seq with attention 강의에서 attention mechanisms 3가지) 이중에서 content-based tanh는 아래와 같다.
+
+![ㅈㅈㅈㅈ](https://user-images.githubusercontent.com/59636424/132995137-8e2b3d4a-e9cf-4a5d-9a8e-1253aba17188.PNG)
+
+그리고 decoder RNN과 attention RNN을 사용한다!
+
+input으로 context vector + attention RNN cell output을 사용한다!
+
+* 전반적인 Decoder 흐름
+
+**decoder는 인코더에서 생성된 Sequence 벡터(context vector)와 t-1 시점까지 생성된 decoder의 mel-scale spectrogram을 input으로 사용해 t 시점의 mel-scale spectrogram을 생성!**
+
+        * mel-scale spectrogram이란?
+        
+        원래 peach(음의 높낮이)가 주파수가 증가함에 따라 exponential 상승하니 log 적용하여 linear하게 만든 spectrogram이다.
+        
+   1. decoder의 input은 t-1 시점까지 decoder에서 생성된 mel spectrogram이다. 처음 시점에는 생성된 spectrogram이 없으므로 all-zero frame <Go>를 input으로 사용한다.
+   
+        decoder의 t-1 시점의 예측값인 r개 중 마지막 frame을 t 시점의 input으로 사용
+    
+   2. input을 pre-net을 통과시켜 벡터 생성 후, Attention-RNN의 input으로 사용한다.
+   
+        encoder와 마찬가지로 decoder의 pre-net도 과적합을 막기 위해 사용한다! -> dropout이 그 역할을 한다!
+    
+   3. Attention-RNN에서 추출된 Sequence hidden vector를 Query로 attention에 넣어 encoder의 vector의 각 시점과 관련된 vector의 가중합인 context vector를 추출한다.
+    
+   4. 이렇게 구한 Sequence hidden vector와 context vector를 concat해서 Decoder-RNN의 Input으로 사용한다!
+   
+   5. Decoder-RNN에서 추출된 결과가 Decoder output인 t시점의 mel spectrogram이다!
+   
+        각 decoder step에서 한번에 r개의 겹치지 않은 output frame을 예측
+        
+        -> r개의 예측값 전체를 input으로 사용할 수도 있다!
+    
+        이렇게 한 시점에서 r개의 frame(r개의 mel spectrogram)을 한꺼번에 뽑으면 decoder step의 전체 수를 r만큼 줄일 수 있다!
+    
+        -> 그러므로 학습 및 수렴 속도를 상승시킨다!
+
+이렇게 나온 매 시점별 생성된 r개씩의 mel spectrogram을 post-processing net의 input으로 사용한다!
+    
+## 2-4. POST-PROCESSING NET AND WAVEFORM SYNTHESIS
+
+
+
 
 
