@@ -30,7 +30,7 @@
     
     3. 음섣 특성을 예측하는 모델
     
-    4. 음성 신호 합성을 위한 vocoder(스펙트로그램(음성을 숫자로 표현하는 여러가지 방법 중 하나)을 소리로 변환)
+    4. 음성 신호 합성을 위한 vocoder(spectrogram(음성을 숫자로 표현하는 여러가지 방법 중 하나)을 소리로 변환)
     
     이렇게 4가지로 이루어져 있다.
 
@@ -56,5 +56,21 @@
 
 **따라서, 이러한 이점을 통해 end-to-end모델로 현실에서 얻을 수 있는 다양하고 noisy한 많은 데이터를 학습할 수 있도록 한다. -> 이러한 측면에서 모델을 만들었다!**
 
+- end-to-end 모델은 어려운 학습 과제가 있다!
 
+    같은 text라도 다른 발음이나 말하는 스타일로도 대응할 수 있어 학습이 어렵다.(그래서 주어진 입력을 다양한 signal level로 대체된다.)
+    
+    TTS output은 연속적이고 output sequence는 보통 입력보다 많이 길어 prediction error가 빠르게 축적된다.
+
+**그래서 논문에서는 Tacotron을 제안!**
+
+: attention과 sequence to sequence 모델을 기반한 end-to-end TTS 모델이다.
+
+    입력은 characters, 출력은 raw spectrogram이다.
+    
+    <text, audio>로 주어진 쌍에서, random 초기화로 완전히 훈련될 수 있다.
+    
+    음소(언어의 낱말을 구분시켜주는 이론적인 낱낱의 소리) 수준의 할당이 필요없으니 texst만 있는 많은 양의 데이터로 학습 가능하다.
+    
+    US English evaluation st에서 3.82의 mean opinion score를 기록했다.
 
