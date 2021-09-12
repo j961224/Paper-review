@@ -172,17 +172,15 @@ input으로 context vector + attention RNN cell output을 사용한다!
         
         원래 peach(음의 높낮이)가 주파수가 증가함에 따라 exponential 상승하니 log 적용하여 linear하게 만든 spectrogram이다.
         
-   1. decoder의 input은 t-1 시점까지 decoder에서 생성된 mel spectrogram이다. 처음 시점에는 생성된 spectrogram이 없으므로 all-zero frame <Go>를 input으로 사용한다.
-   
-        decoder의 t-1 시점의 예측값인 r개 중 마지막 frame을 t 시점의 input으로 사용
+   1. decoder의 **input은 t-1 시점까지 decoder에서 생성된 mel spectrogram**이다. 처음 시점에는 생성된 spectrogram이 없으므로 all-zero frame <Go>를 input으로 사용한다.
     
    2. input을 pre-net을 통과시켜 벡터 생성 후, Attention-RNN의 input으로 사용한다.
    
         encoder와 마찬가지로 decoder의 pre-net도 과적합을 막기 위해 사용한다! -> dropout이 그 역할을 한다!
     
-   3. Attention-RNN에서 추출된 Sequence hidden vector를 Query로 attention에 넣어 encoder의 vector의 각 시점과 관련된 vector의 가중합인 context vector를 추출한다.
+   3. Attention-RNN에서 추출된 Sequence hidden vector를 Query로 attention에 넣어 encoder의 vector의 각 시점과 관련된 vector의 가중합인 **context vector**를 추출한다.
     
-   4. 이렇게 구한 Sequence hidden vector와 context vector를 concat해서 Decoder-RNN의 Input으로 사용한다!
+   4. 이렇게 구한 **Sequence hidden vector와 context vector를 concat**해서 Decoder-RNN의 Input으로 사용한다!
    
    5. Decoder-RNN에서 추출된 결과가 Decoder output인 t시점의 mel spectrogram이다!
    
@@ -198,7 +196,28 @@ input으로 context vector + attention RNN cell output을 사용한다!
     
 ## 2-4. POST-PROCESSING NET AND WAVEFORM SYNTHESIS
 
+![ㅌㅌㅌ](https://user-images.githubusercontent.com/59636424/132996670-ed4acef7-d102-4a01-a8cf-3462b8c007d1.PNG)
 
+**post-processing net의 역할은 seq2seq target을 waveform(파형)으로 합성할 수 있는 target으로 변환시켜주기**
+    
+* post-processing net에서 **decoder에서 mel spectrogram 전체를 보고 linear spectrogram을 생성**한다! 
+    
+    -> decoder에서 바로 linear spectrogram을 생성한 tacotron모델보다 좋은 품질의 음성을 생성한다!
+    
+    Seq2Seq 모델은 decoder는 시점별로 한개씩 mel spectrogram을 생성
+    
+* post-processing net에서 CBHG module에서 Bidirectional GRU를 이용하므로 각 frame에 예측 에러를 바로잡기 위해 정방향, 역방향 정보를 모두 가진다!
+    
+    -> Seq2Seq모델은ㅊ항상 왼쪽에서 오른쪽으로 동작한다.
+
+* Griffin-Lim 알고리즘
+    
+    **linear spectrogram을 음성 신호(waveform)로 합성하는데 사용되는 알고리즘이다!**
+    
+    미분을 이용하고 학습 가능한 weight가 없기 때문에 이 과정에서 어떠한 loss도 없다.
+    
+    
+    
 
 
 
