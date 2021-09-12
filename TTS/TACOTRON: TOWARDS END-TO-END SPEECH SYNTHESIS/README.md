@@ -22,6 +22,7 @@
 
 - 현대 TTS 파이프라인은 복잡하다!
 
+
 예시로 [통계학적 parametric TTS](https://github.com/j961224/Paper-review/blob/main/TTS/TACOTRON:%20TOWARDS%20END-TO-END%20SPEECH%20SYNTHESIS/%ED%86%B5%EA%B3%84%ED%95%99%EC%A0%81%20parametric%20TTS.md)를 들자!
 
     1. 다양한 언어학적 특성들을 추출하는 text frontend
@@ -34,6 +35,8 @@
     
     이렇게 4가지로 이루어져 있다.
 
+![tts](https://user-images.githubusercontent.com/59636424/132998191-995df7b7-73ff-470c-8825-99a0a700b0ff.PNG)
+
 - 이러한 통계학적 parametric TTS의 단점은?
 
     1. 각각 광범위한 전문적인 도메인 지식을 기반하고 디자인하기 매우 어렵다.
@@ -41,6 +44,12 @@
     2. 각 요소가 독립적으로 학습해 각 요소에서 발생한 에러가 축적될 수 있다.
 
     3. 새로운 시스템 구축 시, 상당한 엔지니어적인 노력이 필요로 한다.
+
+![ccc](https://user-images.githubusercontent.com/59636424/132998243-4d889fa7-9d45-436b-b42c-afc42ceb61c6.PNG)
+
+
+![ent-to](https://user-images.githubusercontent.com/59636424/132998189-43cbf9b1-ed24-425e-bd11-78c41c8de448.PNG)
+
 
 - **그래서 최소한의 사람이 라벨링한 <text,audio> pair로만 학습될 수 있는 end-to-end TTS 시스템을 사용할 시, 장점은?**
 
