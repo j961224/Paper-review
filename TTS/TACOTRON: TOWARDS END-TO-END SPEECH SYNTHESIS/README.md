@@ -203,7 +203,7 @@ input으로 context vector + attention RNN cell output을 사용한다!
 
 이렇게 나온 매 시점별 생성된 r개씩의 mel spectrogram을 post-processing net의 input으로 사용한다!
     
-## 2-4. POST-PROCESSING NET AND WAVEFORM SYNTHESIS
+### 2-4. POST-PROCESSING NET AND WAVEFORM SYNTHESIS
 
 ![ㅌㅌㅌ](https://user-images.githubusercontent.com/59636424/132996670-ed4acef7-d102-4a01-a8cf-3462b8c007d1.PNG)
 
