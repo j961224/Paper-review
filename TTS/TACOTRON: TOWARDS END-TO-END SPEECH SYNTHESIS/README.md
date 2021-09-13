@@ -1,5 +1,7 @@
 # TACOTRON: TOWARDS END-TO-END SPEECH SYNTHESIS 논문 리뷰!
 
+[논문링크](https://arxiv.org/pdf/1703.10135.pdf)
+
 **2017년 구글에서 나온 방법으로 이 기술 이후에 TACOTRON2 등이 나왔다.**
 
 ## 0. Abstract
@@ -269,5 +271,16 @@ Tacotron을 North American English dataset(전문 여성 화자의 24.6시간 �
 
 * mean opinion score로 실제 자연스러움의 부분에 있어 **parametric system의 성능을 능가**했다.
     
+---
+    
+## 5. Reference
 
+* End-to-End & Multi stage TTS: https://www.slideshare.net/oldamigo/selvas-ai-dnntts201810
 
+* 한국어 TTS 논문: "한국어 text-to-speech(TTS) 시스템을 위한 엔드투엔드 합성 방식 연구, 2018-06, 최연주 외 4명"
+    
+* mel-scale spectrogram: https://newsight.tistory.com/294
+    
+* 음소: https://tech.kakaoenterprise.com/66
+
+* 통계기반 파라미터 합성기술: http://www.epnc.co.kr/news/articleView.html?idxno=93221
