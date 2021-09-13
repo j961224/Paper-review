@@ -236,6 +236,7 @@ Tacotron을 North American English dataset(전문 여성 화자의 24.6시간 �
     
 ![ㄱㄱㄱㄱㄱㄱ](https://user-images.githubusercontent.com/59636424/132997824-40a63049-b853-45ea-a719-737414bf6983.PNG)
 
+(Attention alignments on a test phrase)
     
 * vanilla Seq2Seq 모델(a)과 attention alignment(sequence) 비교
 
@@ -250,6 +251,8 @@ Tacotron을 North American English dataset(전문 여성 화자의 24.6시간 �
 ---
     
 ![ㅂㅂ](https://user-images.githubusercontent.com/59636424/132997924-c17097ae-5991-4333-b7e8-e0348060af84.PNG)
+    
+(Predicted spectrograms)
 
 * post process net을 사용한 모델과 사용하지 않은 모델 비교
     
