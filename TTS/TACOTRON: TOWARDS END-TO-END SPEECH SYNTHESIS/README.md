@@ -261,7 +261,7 @@ Tacotron을 North American English dataset(전문 여성 화자의 24.6시간 �
 
 * 본 논문에서는 mean opinion score test를 진행했고, 자연스러움에 대해 5점 만점으로 평가
     
-* prarmetric 시스템과 concatenative 시스템과 비교했을 때, **3.82로 좋은 결과**를 보여줬다.
+* prarmetric 시스템과 비교했을 때, **3.82로 좋은 결과**를 보여줬다.
 
 ## 4. Discussions
 
