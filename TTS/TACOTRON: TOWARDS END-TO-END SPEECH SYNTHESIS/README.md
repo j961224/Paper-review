@@ -232,6 +232,8 @@ input으로 context vector + attention RNN cell output을 사용한다!
 
 Tacotron을 North American English dataset(전문 여성 화자의 24.6시간 정도의 발화)에 대해 학습
     
+(음성 실험 결과물)[https://google.github.io/tacotron/publications/tacotron/index.html]
+    
 ### 3-1. Ablation Analysis
     
 ![ㄱㄱㄱㄱㄱㄱ](https://user-images.githubusercontent.com/59636424/132997824-40a63049-b853-45ea-a719-737414bf6983.PNG)
@@ -276,6 +278,7 @@ Tacotron을 North American English dataset(전문 여성 화자의 24.6시간 �
     
 ---
     
+
 ## 5. Reference
 
 * End-to-End & Multi stage TTS: https://www.slideshare.net/oldamigo/selvas-ai-dnntts201810
