@@ -153,7 +153,7 @@ Hightway 네트워크는 Gate 구조를 추가한 Residual Connection이다. **�
 
   2. non-linear transform인 **prenet**의 dropout으로 수렴을 돕고 일반화 효과를 낸다.(overfitting방지) -> 중요 정보를 거르는 역할
   
-        FC-256 layer -> RELU -> Dropout(0.5) -> FC-128 layer -> RELU -> Dropout(0.5)
+        FC-256 layer -> RELU -> Dropout(0.5) -> FC-128 layer -> RELU -> Dropout(0.5) (차원을 줄여줌)
         
         Dropout으로 과적합을 방지하려한다.
   
