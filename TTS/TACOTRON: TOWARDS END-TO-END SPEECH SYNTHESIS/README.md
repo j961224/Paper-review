@@ -151,9 +151,9 @@ Hightway 네트워크는 Gate 구조를 추가한 Residual Connection이다. **�
 
   1. input을 character Sequence로 받고 각 문자들을 one-hot벡터로 만든 후, embedding vector로 변환시켜준다.
 
-  2. non-linear transform인 **prenet**의 dropout과 bottleneck layer로 수렴을 돕고 일반화 효과를 낸다.
+  2. non-linear transform인 **prenet**의 dropout으로 수렴을 돕고 일반화 효과를 낸다.(overfitting방지) -> 중요 정보를 거르는 역할
   
-        Channel 의 차원을 축소하는 개념이 bottleneck layer(FC layer -> RELU -> Dropout(0.5) -> FC layer -> RELU -> Dropout(0.5))
+        FC-256 layer -> RELU -> Dropout(0.5) -> FC-128 layer -> RELU -> Dropout(0.5)
         
         Dropout으로 과적합을 방지하려한다.
   
