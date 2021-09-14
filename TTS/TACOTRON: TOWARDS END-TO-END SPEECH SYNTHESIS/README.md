@@ -232,7 +232,7 @@ input으로 context vector + attention RNN cell output을 사용한다!
 
 Tacotron을 North American English dataset(전문 여성 화자의 24.6시간 정도의 발화)에 대해 학습
     
-(음성 실험 결과물)[https://google.github.io/tacotron/publications/tacotron/index.html]
+[음성 실험 결과물](https://google.github.io/tacotron/publications/tacotron/index.html)
     
 ### 3-1. Ablation Analysis
     
