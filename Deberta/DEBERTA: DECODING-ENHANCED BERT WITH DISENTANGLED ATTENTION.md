@@ -19,3 +19,9 @@ H_i: Sequence i번째에 대한 context vector
 P_{i|j}: i번째의 token에서 j번째에 대한 relative position vector
 
 ![tntlr](https://user-images.githubusercontent.com/59636424/159870581-91e910e5-c857-4f13-9f37-5ec6f3c3c97d.PNG)
+
+위의 수식은 Content Vector와 Relative position Vector와의 Cross Attention식이다.
+
+각 수식은 **Content to Content, Content to Position, Position to Content, Position to Position**으로 이루어져 더해진다. 하지만, position to position은 relative position embedding을 사용하기에, 계산을 하지 않는다!!
+
+* Content to Position: i번째 위치한 Content가 Query로, j position에 대해 Relative position 정도 매핑하여 Attention score를 구한다.
