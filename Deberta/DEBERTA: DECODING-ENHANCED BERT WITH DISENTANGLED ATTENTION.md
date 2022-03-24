@@ -18,3 +18,4 @@ H_i: Sequence i번째에 대한 context vector
 
 P_{i|j}: i번째의 token에서 j번째에 대한 relative position vector
 
+![tntlr](https://user-images.githubusercontent.com/59636424/159870581-91e910e5-c857-4f13-9f37-5ec6f3c3c97d.PNG)
