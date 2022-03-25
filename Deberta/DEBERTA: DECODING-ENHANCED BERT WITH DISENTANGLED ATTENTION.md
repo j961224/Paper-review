@@ -30,6 +30,8 @@ P_{i|j}: i번째의 token에서 j번째에 대한 relative position vector
 
 기존 연구에는 Content to Position, Content to Content로 Attention weight를 구했지만, 한 쪽 방향으로만 모델링 할 수 없으니 **Position to Content**도 고려한다.
 
+---
+
 그래서, token i와 j까지의 relative distance를 고려하기 위한 Relative Position을 사용하려 한다.
 
 ![33](https://user-images.githubusercontent.com/59636424/159897449-607cff4f-2994-4b64-974d-91dc69110d75.PNG)
@@ -40,12 +42,16 @@ P_{i|j}: i번째의 token에서 j번째에 대한 relative position vector
 
 따라서, 위의 식과 같이 **Content to Content, Content to Position, Position to Content**을 고려하여 계산한다. Attention Score 계산이 끝나면 루트(3 x d)로 크게 scaling을 해줘서 모델 학습에 안정화를 시켜준다.
 
+---
 
-(algorithm description needed)
+![temp](https://user-images.githubusercontent.com/59636424/160038726-e4fb2f64-f2af-47b4-8263-2d244b7f6518.png)
 
 원래 relative position embedding 구할 시에 sequence 길이가 N이라면, O(N^2 * d)이지만, K와 Q가 저장되어 재사용되므로 새로 할당받을 필요가 없으므로 매번 계산하더라도 메모리가 O(kd)로 감소시켰다.
 
-(To be continued..)
+---
+
+### Enhanced Mask Decoder
+
 
 
 
