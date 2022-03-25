@@ -52,7 +52,19 @@ P_{i|j}: i번째의 token에서 j번째에 대한 relative position vector
 
 ### Enhanced Mask Decoder
 
+Deberta는 Bert와 같이 MLM으로 학습하는 모델이지만, Disentangled Attention은 content와 relative position만을 고려하고 absolute position을 고려하지 않는다. 그래서, 결정적인 이슈들이 많고 absolute position은 문법적으로 필요한 요소이므로 absolute position을 사용하려 한다.
 
 
+* Absolute position이 필요한 이유
+
+```
+A new store opened beside the new mall
+```
+
+-> store과 mall 주변 단어에 new라는 같은 단어가 있어 context와 relative position만 이용하면 구분이 힘듦 -> 그래서 서로 다른 단어인 것을 Absolute position으로 고려해줌!!
+
+**방법은 MLM softmax 취하기 전에 absolute position을 넣어 합치려고 한다!**
+
+추가적으로, EMD는 pretraining 때, position 뿐만 아니라 유용한 정보를 넣을 수 있다!!
 
 
