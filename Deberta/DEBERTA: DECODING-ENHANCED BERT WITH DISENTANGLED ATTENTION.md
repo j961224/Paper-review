@@ -67,4 +67,27 @@ A new store opened beside the new mall
 
 추가적으로, EMD는 pretraining 때, position 뿐만 아니라 유용한 정보를 넣을 수 있다!!
 
+아래 그림은 Deberta mlm pretrain 과정이다!
+
+![2](https://user-images.githubusercontent.com/59636424/160087779-f7331c7c-496f-46a3-876c-9b0c27d03cc2.png)
+
+![1](https://user-images.githubusercontent.com/59636424/160087308-33b3bfcb-1e9b-4aea-b58c-ab5a8540cd4f.png)
+
+
+---
+
+### SCALE INVARIANT FINE-TUNING (SIFT)
+
+안정적으로 fihne tuning을 하기 위한 알고리즘이다!!
+
+* Virtaul adversarial training
+
+**모델의 성능을 일반화**하는데 좋고 Input에 small perturbation 줌으로써, adversarial attachk에도 모델 robustness를 증진시킨다! -> 최대한 같은 output을 낼 수 있도록 한다!!
+
+NLP task에는 word sequence 대신, **word embedding에 perturbation을 적용**시킨다!
+
+하지만!, 임베딩 값은 단어나 모델마다 매우 다르고 큰 모델일수록, variance가 커지며 adversarial training의 불안정성을 키운다!! => 그래서 **normalized word embedding에 perturbation을 추가하는 Adversarial Fine-Tuning**
+
+**그리고 모델의 크기가 클수록 성능 개선이 뚜렷하다!!**
+
 
