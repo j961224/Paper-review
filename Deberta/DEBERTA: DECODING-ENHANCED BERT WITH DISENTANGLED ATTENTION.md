@@ -103,10 +103,37 @@ PLM 연구들을 따라, NLU와 NLG Task 수행
 > * Roberta pretrain 학습 방법인 dynamic data batching 사용!
 > * Span Bert처럼 Span Masking 사용! 
 
+* 모델 사이즈
+
+![table8, 9](https://user-images.githubusercontent.com/59636424/160329370-4b1f4ccf-582d-42d8-8f91-8ca0ed04d722.PNG)
+
+
+* Glue BenckMark
+
+기존 PLM들보다 좋은 성능을 냈다.
+
+XLNet과 RoBERTa, ELECTRA는 160G 데이터로 학습을 진행했지만, DeBERTa는 이의 절반 가량의 데이터로 학습했지만 DeBERTa가 가장 높은 성능 도출
+
+* NLU benchmark
+
+비슷한 크기의 모델 중에서 DeBERTa가 가장 높은 성능을 보였다. -> Question Answering(SQuAD, RACE, SWAG), NER
+
+* 모델 크기에 따른 GLUE 비교
+
+그냥 Deberta보다는 SIFT를 사용하는 것이 성능이 더 좋음을 알 수 있다.
 
 
 ## 5. Conclusion
 
+**Disentangled attention**과 **Enhanced Mask Decoder** 기술을 소개하며 BERT와 RoBERTa 모델을 뛰어넘은 DeBERTa를 소개했다.
+
+그리고 Downstream task에 대해서 SIFT로 모델 일반화를 시도했다.
+
+SuperGlue benchmark에서는 인간의 성능을 뛰어넘었지만, 인간 수준의 지능까지는 도달하지 못 했다.
+
+
 ## 6. 참고자료
 
 Deberta Code Link: https://github.com/microsoft/DeBERTa
+
+Paper Link: https://arxiv.org/pdf/2006.03654.pdf
