@@ -76,7 +76,7 @@ A new store opened beside the new mall
 
 ---
 
-### SCALE INVARIANT FINE-TUNING (SIFT)
+## 3. SCALE INVARIANT FINE-TUNING (SIFT)
 
 안정적으로 fihne tuning을 하기 위한 알고리즘이다!!
 
@@ -91,3 +91,22 @@ NLP task에는 word sequence 대신, **word embedding에 perturbation을 적용*
 **그리고 모델의 크기가 클수록 성능 개선이 뚜렷하다!!**
 
 
+---
+
+## 4. Experiment
+
+PLM 연구들을 따라, NLU와 NLG Task 수행
+
+![table 7](https://user-images.githubusercontent.com/59636424/160313291-d067b0bd-2de9-4568-ac5d-cd6dc4d7f989.PNG)
+
+> * 총 78GB의 학습 데이터를 사용!
+> * Roberta pretrain 학습 방법인 dynamic data batching 사용!
+> * Span Bert처럼 Span Masking 사용! 
+
+
+
+## 5. Conclusion
+
+## 6. 참고자료
+
+Deberta Code Link: https://github.com/microsoft/DeBERTa
