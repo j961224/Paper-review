@@ -9,8 +9,10 @@
 # To-Do
 
 
-[A DEEP REINFORCED MODEL FOR ABSTRACTIVE SUMMARIZATION](https://arxiv.org/pdf/1705.04304.pdf)
+[A DEEP REINFORCED MODEL FOR ABSTRACTIVE SUMMARIZATION](https://arxiv.org/pdf/1705.04304.pdf) -> rl idea
 
-[Fast Abstractive Summarization with Reinforce-Selected Sentence Rewriting](https://arxiv.org/pdf/1805.11080.pdf)
+[Fast Abstractive Summarization with Reinforce-Selected Sentence Rewriting](https://arxiv.org/pdf/1805.11080.pdf) -> rl idea2
 
-[BETTER FINE-TUNING BY REDUCING REPRESENTATIONAL COLLAPSE](https://arxiv.org/pdf/2008.03156v1.pdf)
+[BETTER FINE-TUNING BY REDUCING REPRESENTATIONAL COLLAPSE](https://arxiv.org/pdf/2008.03156v1.pdf) -> r3f idea
+
+[SimCLS: A Simple Framework for Contrastive Learning of Abstractive Summarization 2021](https://arxiv.org/pdf/2106.01890.pdf) -> rerank idea?
