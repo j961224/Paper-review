@@ -27,3 +27,25 @@
 
 discriminator와 generator는 같은 token embedding을 공유하면, discriminator와 generator의 훈련 objective가 매우 다르므로 train loss가 서로 다른 방향으로 당겨지니 훈련 효율성이 떨어진다.
 
+* discriminator의 RTD는 binary classification 정확도를 최적화 하기 위해 유사한 토큰을 구별하고 embedding을 최대한 멀리 끌어당기기 -> tug-of-war 발생
+
+* **gradient disentangled embedding sharing(GDES)**: discriminator의 gradient가 generator embedding으로 back propagation 하는 것을 방지
+
+## 2. Background
+
+### 2.1 Transformer
+
+* 기존 Transformer 방식: 각 input word embedding에 position bias 추가
+* position bias: absolute position embedding or relative position embedding
+
+### 2.2 DeBERTa
+
+* disentangled attention + enhanced mask decoder 사용
+* disentangled attention은 two separate vector 사용(content vector and psotiion vector)
+* disentangled attention은 content와 relative position 모두 disentangled 행렬로 계산
+* **disentangled attention은 context word들의 content와 relative positions을 고려하지만, absolute position은 고려하지 않음**
+* **enhanced mask decoder에서 decoder layer에 context word의 absolute position 정보를 추가해 MLM 개선**
+
+### 2.3 ELECTRA
+
+
