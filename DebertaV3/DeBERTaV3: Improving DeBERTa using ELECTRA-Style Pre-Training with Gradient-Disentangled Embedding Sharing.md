@@ -48,4 +48,43 @@ discriminator와 generator는 같은 token embedding을 공유하면, discrimina
 
 ### 2.3 ELECTRA
 
+#### 2.3.1 Masked Language Model
+
+* token의 15%를 X(물결)로 마스킹 -> X에 조건화된 masked token X(물결)를 예측하여 X를 재구성하기 위해 매개 변수화된 언어 모델 사용
+
+![캡처](https://user-images.githubusercontent.com/59636424/182983949-897f9d8e-d331-43ff-b0e3-0b60bbf54521.PNG)
+
+#### 2.3.2 Replaced token detection
+
+* generator: MLM으로 학습 / discriminator: token-level 이진 분류기로 학습
+
+* discriminator의 training objective = RTD
+* Generator loss function
+
+![MLM](https://user-images.githubusercontent.com/59636424/182984779-ac98e863-3ada-4bdf-a6c2-dcb705ed42a3.PNG)
+
+X(물결) _ G: X에 15% masking함으로 generator의 input
+
+* Generator로부터 확률 분포
+
+![wdwd](https://user-images.githubusercontent.com/59636424/182985025-d88a57de-25f0-4e7e-b510-0dbfb373a2ca.PNG)
+
+* discriminator의 loss function
+
+![rtrtrt](https://user-images.githubusercontent.com/59636424/182985089-d438d4b3-1504-4a25-9552-66caf713e692.PNG)
+
+l(.): indicator function(어떤 원소가 어떤 집합에 표함되는지 아닌지를 표시)
+
+* **L = L_MLM + 람다 * L_RTD** -> MLM loss와 RTD loss를 함께 최적화 시킨다. (람다: 50)
+
+## 3. DeBERTaV3
+
+
+
+
+
+
+
+
+
 
